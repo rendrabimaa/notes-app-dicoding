@@ -1,6 +1,6 @@
 import React from "react";
 
-const Button = ({ color = "blue", size, children }) => {
+const Button = ({ color = "blue", size, textColor="black", onClick, children }) => {
     switch(size) {
         case "large":
             size = "h-12 w-24"
@@ -13,7 +13,7 @@ const Button = ({ color = "blue", size, children }) => {
     }
     return (
         <>
-        <button color={color} className={`bg-${color}-500 ${size} text-white rounded-lg`}>
+        <button color={color} className={`bg-${color}-500 ${size} text-${textColor} rounded-lg`} onClick={onClick}>
             {children}
         </button>
         </>
