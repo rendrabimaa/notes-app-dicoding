@@ -10,17 +10,14 @@ const Notes = () => {
     const params = useLocation()
     const {urlParamsContext, setUrlParamsContext} = useUrlParamsContext()
     
+    
     useEffect(() => {
         setUrlParamsContext(params.pathname)
     }, [params])
 
     return (
         <Container>
-            <div className="flex justify-between mb-12 items-end">
-                <TitlePage>
-                    Ini Notes Page
-                </TitlePage>
-                
+            <div className="flex justify-between w-full mb-4 mt-60 md:mt-56 items-end">
             </div>
             <Cards archived={false}/>
         </Container>

@@ -1,19 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-const Input = ({label, type, placeholder, name, style, onInputChange}) => {
-  const [inputValue, setInputValue] = useState('')
-
-  const handleInputChange = event => {
-    const value = event.target.value
-    setInputValue(value)
-    onInputChange(value)
-  }
-
+const Input = ({label, type, placeholder, name, style, styleLabel, onValueChange, value, isContentOfNote = false, cols='', rows=''}) => {
   return (
-    <div>
-        {label && <label for={name}>{ label }</label>}
-        <input name={name} type={type} placeholder={placeholder} className={style} value={inputValue} onChange={handleInputChange}/>
-    </div>
+    <>
+        {label && <label htmlFor={name} className={styleLabel}>{ label }</label>}
+        {isContentOfNote ? 
+        <textarea name={name} type={type} placeholder={placeholder} className={style} cols={cols} rows={rows} onChange={onValueChange} value={value}/> :
+        <input name={name} type={type} placeholder={placeholder} className={style} onChange={onValueChange} value={value}/>
+        }
+    </>
     
   )
 }

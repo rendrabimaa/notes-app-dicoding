@@ -1,5 +1,4 @@
 import React, { useEffect } from "react"
-import TitlePage from "../../Fragments/TitlePage"
 import Container from "../../Layouts/Container"
 import Cards from "../../Fragments/Cards"
 import { useLocation } from "react-router-dom"
@@ -16,8 +15,7 @@ const ArchiveNotes = () => {
 
     return (
         <Container>
-            <div className="flex justify-between mb-12 items-end">
-                <TitlePage title="Archive Notes" />
+            <div className="flex justify-between mb-4 mt-60 md:mt-56 items-end">
             </div>
             <Cards archived={true}/>
         </Container>

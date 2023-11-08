@@ -8,15 +8,24 @@ const AppDispatch = createContext(null)
 const reducer = (state, action) => {
     switch (action.type) {
         case 'ADD_NOTES':
-            const newNote = {
-                id: new Date().getTime(),
-                title,
-                body,
-                createdAt: new Date().getTime(),
-                archived
-            }
-             return { ...state, notes: [state.notes, newNote]}
+            return [...state, action.payload];
             break;
+
+        case 'EDIT_NOTE': {
+            const editedNote = state.map((note) => {
+                        if(note.id === action.payload.id) {
+                            return {
+                                ...note, 
+                                title: action.payload.title,
+                                body: action.payload.body,
+                                archived: action.payload.archived
+                            }
+                        }
+                        return note;
+                    })
+
+            return editedNote;
+        }
         case 'ARCHIVE_NOTES': {
             const updatedNotes = state.map((note) => {
                 if(note.id === action.payload.noteId) {

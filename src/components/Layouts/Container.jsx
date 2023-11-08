@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
+import Modal from "../Elements/Modal";
 
 const Container = ({ children }) => {
   return (
-    <div className='flex flex-col p-4 w-full'>
-        { children }
-    </div>
+    <>
+      <div className='flex flex-col p-2 w-full'>
+          { children }
+      </div>
+    </>
   )
 }
 
