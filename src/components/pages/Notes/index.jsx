@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react"
-import TitlePage from "../../Fragments/TitlePage"
 import Container from "../../Layouts/Container"
 import Cards from "../../Fragments/Cards"
 import { useLocation } from "react-router-dom"

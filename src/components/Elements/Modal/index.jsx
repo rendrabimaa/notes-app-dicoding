@@ -45,6 +45,9 @@ const Modal = ({ isEditModal, note, modalIsOpen, closeModal }) => {
             archived: archiveNote,
         }
     })
+    setTitleValue('')
+    setContentValue('')
+    setArchiveNote(false)
     closeModal()
   }
 

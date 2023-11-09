@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '../Button'
+import { Link } from 'react-router-dom'
 
 const Card = ({data, handleClickAction}) => {
 
@@ -16,7 +17,7 @@ const Card = ({data, handleClickAction}) => {
         <>
             <div className='flex flex-col justify-between border-solid border-4 px-4 py-2 rounded-md border-slate-600 w-full md:w-72'>
                 <div>
-                    <p className='font-semibold text-xl md:mb-2'>{data.title}</p>
+                    <Link to={`/note/${data.id}`} className='font-semibold text-xl md:mb-2'>{data.title}</Link>
                     <p className='text-sm line-clamp-2 md:line-clamp-3 max-w-md'>{data.body}</p>
                 </div>
                 <div className='flex gap-2 mt-4 justify-end'>

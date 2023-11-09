@@ -31,6 +31,10 @@ const App = () => {
     return (
         <Router>
             <UrlParamsProvider>
+                <Routes>
+                    <Route path="/note/1" element={ <h1>Hello</h1> } />
+                        
+                </Routes>
                 <div className="flex flex-col w-full md:w-2/3 mx-auto"> 
                 <SearchProvider>
                     <Navbar openAddModal={openAddModal} />
