@@ -16,10 +16,6 @@ const Cards = ({ archived }) => {
         setModalIsOpen(true)
     }
 
-    useEffect(() => {
-        console.log(modalIsOpen)
-    }, [modalIsOpen])
-
     const closeModal = () => {
         setModalIsOpen(false)
     }
@@ -63,8 +59,6 @@ const Cards = ({ archived }) => {
     const data = notes.find((result) => result.id === id)
     setSelectedItem(data)
   }
-
-
 
   return (
     <>

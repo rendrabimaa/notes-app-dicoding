@@ -75,7 +75,7 @@ const Modal = ({ isEditModal, note, modalIsOpen, closeModal }) => {
                     backgroundColor: 'rgba(0, 0, 0, 0.75)'
                 },
                 content: {
-                width: '700px',
+                width: '90%',
                 height: '600px',
                 margin: 'auto',
                 background: '#fff',
@@ -85,7 +85,11 @@ const Modal = ({ isEditModal, note, modalIsOpen, closeModal }) => {
                 padding: '20px',
                 borderRadius: '10px',
                 border: '2px solid gray',
-                boxShadow: '5px 5px 10px 2px rgba(255, 255, 255, 0.5)'
+                boxShadow: '5px 5px 10px 2px rgba(255, 255, 255, 0.5)',
+
+                '@media (minWidth: 768px)': {
+                  width: '700px',
+                },
                 }
                 }}
         >
@@ -115,7 +119,10 @@ const Modal = ({ isEditModal, note, modalIsOpen, closeModal }) => {
                     value={contentValue}
                     onValueChange={handleContentValue}
                 />
-                <input type="checkbox" checked={archiveNote} onChange={(e) => setArchiveNote(e.target.checked)} />
+                <div className='flex gap-2 mb-4'>
+                  <input name='archived' type="checkbox" checked={archiveNote} onChange={(e) => setArchiveNote(e.target.checked)} />
+                  <label htmlFor="archived" className='font-semibold'>Archive</label>
+                </div>
                 <Button children={isEditModal ? 'Edit Note' : 'Add Note'} size={'large'} optionalClass={"bg-blue-500 w-full text-white font-semibold"} onClick={isEditModal ? editNote : addNote} />
             {/* </div> */}
         </ReactModal>
