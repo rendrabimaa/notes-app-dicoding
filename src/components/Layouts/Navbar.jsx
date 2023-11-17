@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AddNoteButton from "../Fragments/AddNoteButton";
 import SearchBar from "../Fragments/SearchBar";
 import { useUrlParamsContext } from "../../context/URLParamsContext";
+import PropTypes from "prop-types";
 import ReactModal from "react-modal";
 import Input from "../Elements/Input";
 
@@ -33,10 +34,12 @@ const Navbar = ({openAddModal}) => {
                     </li>
                 </ul>
             </div>
-
-            
         </>
     )
+}
+
+Navbar.propTypes = {
+    openAddModal: PropTypes.func.isRequired
 }
 
 export default Navbar

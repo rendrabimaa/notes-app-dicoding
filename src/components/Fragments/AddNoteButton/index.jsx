@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '../../Elements/Button'
+import PropTypes from 'prop-types'
 
 const AddNoteButton = ({ openAddModal }) => {
   return (
@@ -10,6 +11,10 @@ const AddNoteButton = ({ openAddModal }) => {
         Add Note
     </Button>
   )
+}
+
+AddNoteButton.propTypes = {
+  openAddModal: PropTypes.func.isRequired,
 }
 
 export default AddNoteButton

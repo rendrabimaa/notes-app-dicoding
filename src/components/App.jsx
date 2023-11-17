@@ -8,6 +8,7 @@ import UrlParamsProvider from "../context/URLParamsContext";
 import ReactModal from "react-modal";
 import MainLayout from "./Layouts/MainLayout";
 import DetailNote from "./pages/DetailNote";
+import NotFound from "./pages/404";
 
 ReactModal.setAppElement('#root');
 
@@ -24,6 +25,7 @@ const App = () => {
                                     <Route path="archive" element={<ArchiveNotes />} />
                                 </Route>
                                 <Route path="/note/:id" element={<DetailNote />} />
+                                <Route path="*" element={<NotFound />} />
                             </Routes>
                     </AppProvider>
                 </SearchProvider>

@@ -37,4 +37,5 @@ const Card = ({data, handleClickAction}) => {
     )
 }
 
+
 export default Card

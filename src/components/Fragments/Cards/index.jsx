@@ -4,6 +4,7 @@ import NotFoundText from '../../Elements/NotFoundText'
 import { useAppContext, useAppDispatch } from '../../../context/AppContext'
 import { useSearchContext } from '../../../context/SearchContext'
 import Modal from '../../Elements/Modal'
+import PropTypes from 'prop-types'
 
 const Cards = ({ archived }) => {
   const notes = useAppContext()
@@ -72,6 +73,10 @@ const Cards = ({ archived }) => {
       </div>
     </>
   )
+}
+
+Cards.propTypes = {
+  archived: PropTypes.bool.isRequired,
 }
 
 export default Cards

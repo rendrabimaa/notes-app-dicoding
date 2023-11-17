@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import ReactModal from 'react-modal'
 import Input from '../Input'
 import Button from '../Button'
+import PropTypes from 'prop-types'
 import { useAppDispatch, useAppContext } from '../../../context/AppContext'
+
 
 const Modal = ({ isEditModal, note, modalIsOpen, closeModal }) => {
   const [archiveNote, setArchiveNote] = useState(false);
@@ -128,6 +130,13 @@ const Modal = ({ isEditModal, note, modalIsOpen, closeModal }) => {
         </ReactModal>
     </>
   )
+}
+
+Modal.propTypes = {
+  isEditModal: PropTypes.bool,
+  note: PropTypes.object,
+  modalIsOpen: PropTypes.bool,
+  closeModal: PropTypes.func.isRequired,
 }
 
 export default Modal
