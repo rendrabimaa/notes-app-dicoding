@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from '../Button'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 const Card = ({data, handleClickAction}) => {
 
@@ -35,6 +36,11 @@ const Card = ({data, handleClickAction}) => {
             
         </>
     )
+}
+
+Card.propTypes = {
+    data: PropTypes.object,
+    handleClickAction: PropTypes.func,
 }
 
 

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 const Toggle = ({ children, toggleDarkMode }) => {
     return (
@@ -8,6 +9,11 @@ const Toggle = ({ children, toggleDarkMode }) => {
             </button>
         </div>
     )
+}
+
+Toggle.propTypes = {
+    children: PropTypes.node,
+    toggleDarkMode: PropTypes.func,
 }
 
 export default Toggle;

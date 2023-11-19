@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Button = ({size, optionalClass="", onClick, children }) => {
     switch(size) {
@@ -19,6 +20,17 @@ const Button = ({size, optionalClass="", onClick, children }) => {
         </button>
         </>
     )
+}
+
+Button.propTypes = {
+    size: PropTypes.string,
+    optionalClass: PropTypes.string,
+    onClick: PropTypes.func,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]),
+
 }
 
 export default Button;

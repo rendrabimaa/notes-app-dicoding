@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Input = ({label, type, placeholder, name, style, styleLabel, onValueChange, value, isContentOfNote = false, cols='', rows=''}) => {
   return (
@@ -11,6 +12,20 @@ const Input = ({label, type, placeholder, name, style, styleLabel, onValueChange
     </>
     
   )
+}
+
+Input.propTypes = {
+  label: PropTypes.string,
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  name: PropTypes.string,
+  style: PropTypes.string,
+  styleLabel: PropTypes.string,
+  onValueChange: PropTypes.func,
+  value: PropTypes.string,
+  isContentOfNote: PropTypes.bool,
+  cols: PropTypes.string,
+  rows: PropTypes.string,
 }
 
 export default Input
