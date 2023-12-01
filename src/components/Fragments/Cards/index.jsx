@@ -22,16 +22,16 @@ const Cards = ({ archived }) => {
     }
   
   useEffect(() => {
-    setFilteredNotes(notes.filter(note => note.archived === archived))
-  }, [notes])
+    console.log(notes)
+  }, [])
 
-  useEffect(() => {
-    if(searchContext.length > 0) {
-      setFilteredNotes(filteredNotes.filter((result) => result.title.toLowerCase().includes(searchContext.toLowerCase())))
-    } else{
-      setFilteredNotes(notes.filter(note => note.archived === archived))
-    }
-  }, [searchContext])
+  // useEffect(() => {
+  //   if(searchContext.length > 0) {
+  //     setFilteredNotes(filteredNotes.filter((result) => result.title.toLowerCase().includes(searchContext.toLowerCase())))
+  //   } else{
+  //     setFilteredNotes(notes.filter(note => note.archived === archived))
+  //   }
+  // }, [searchContext])
 
   const handleClickAction = (id, action) => {
     switch(action) {

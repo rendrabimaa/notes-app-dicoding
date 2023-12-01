@@ -3,11 +3,14 @@ import Container from "../../Layouts/Container"
 import Cards from "../../Fragments/Cards"
 import { useLocation } from "react-router-dom"
 import { useUrlParamsContext } from "../../../context/URLParamsContext"
+import { useAuthContext } from "../../../context/AuthContext"
 
 
 const Notes = () => {
+    
+    const {handleIsLogedIn} = useAuthContext();
     const params = useLocation()
-    const {urlParamsContext, setUrlParamsContext} = useUrlParamsContext()
+    const {setUrlParamsContext} = useUrlParamsContext()
     
     
     useEffect(() => {

@@ -15,10 +15,12 @@ const MainLayout = () => {
     }
     
   return (
-    <div className="flex flex-col w-full md:w-2/3 mx-auto">
-        <Navbar openAddModal={openAddModal} />
-        <Modal modalIsOpen={modalIsOpen} closeModal={closeModal} />
-        <Outlet />
+    <div className='bg-white dark:bg-slate-600 min-h-screen'>
+      <div className="flex flex-col w-full md:w-2/3 mx-auto">
+          <Navbar openAddModal={openAddModal} />
+          <Modal modalIsOpen={modalIsOpen} closeModal={closeModal} />
+          <Outlet />
+      </div>
     </div>
   )
 }

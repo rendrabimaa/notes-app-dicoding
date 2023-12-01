@@ -16,7 +16,7 @@ const Card = ({data, handleClickAction}) => {
     }
     return (
         <>
-            <div className='flex flex-col justify-between border-solid border-4 px-4 py-2 rounded-md border-slate-600 w-full md:w-72'>
+            <div className='flex flex-col justify-between border-solid border-4 px-4 py-2 rounded-md w-full md:w-72 border-slate-600 dark:border-white text-slate-600 dark:text-white'>
                 <div>
                     <Link to={`/note/${data.id}`} className='font-semibold text-xl md:mb-2'>{data.title}</Link>
                     <p className='text-sm line-clamp-2 md:line-clamp-3 max-w-md'>{data.body}</p>

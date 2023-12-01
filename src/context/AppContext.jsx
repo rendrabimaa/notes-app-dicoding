@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { getInitialData } from "../utils";
+import { getActiveNotes } from "../utils/network-data";
 
 const AppContext = createContext(null)
 
@@ -53,7 +53,7 @@ const reducer = (state, action) => {
 }
 
 const AppProvider = ({ children }) => {
-    const initialData = getInitialData()
+    const initialData = getActiveNotes();
     const [notes, dispatch] = useReducer(reducer, initialData);
 
     return (
