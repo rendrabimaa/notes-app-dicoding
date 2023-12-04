@@ -19,7 +19,7 @@ const DarkModeContextProvider = ({children}) => {
     const toggleDarkMode = () => {
         setIsDarkMode(prevMode => {
             const newMode = !prevMode;
-            // localStorage.setItem('darkMode', JSON.stringify(newMode));
+            localStorage.setItem('darkMode', JSON.stringify(newMode));
             return newMode;
         })
 
