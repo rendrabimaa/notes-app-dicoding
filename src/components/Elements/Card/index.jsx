@@ -8,9 +8,11 @@ const Card = ({data, handleClickAction}) => {
     const handleArchive = () => {
         handleClickAction(data.id, 'archive')
     }
-    const handleEdit = () => {
-        handleClickAction(data.id, 'edit')
+
+    const handleUnarchive = () => {
+        handleClickAction(data.id, 'unarchive')
     }
+    
     const handleDelete = () => {
         handleClickAction(data.id, 'delete')
     }
@@ -22,11 +24,8 @@ const Card = ({data, handleClickAction}) => {
                     <p className='text-sm line-clamp-2 md:line-clamp-3 max-w-md'>{data.body}</p>
                 </div>
                 <div className='flex gap-2 mt-4 justify-end'>
-                    <Button optionalClass='bg-blue-500 text-white' size='small' onClick={handleArchive}>
-                        {!data.archived ? "Archive" : "Unarchive"}
-                    </Button>
-                    <Button optionalClass='bg-yellow-500 text-white' size='small' textColor='white' onClick={handleEdit}>
-                        Edit
+                    <Button optionalClass='bg-blue-500 text-white' size='small' onClick={data.archived ? handleUnarchive : handleArchive}>
+                        {data.archived ? "Unarchive" : "Archive"}
                     </Button>
                     <Button optionalClass='bg-red-500 text-white' size='small' textColor='white' onClick={handleDelete}>
                         Delete

@@ -3,30 +3,12 @@ import ReactModal from 'react-modal'
 import Input from '../Input'
 import Button from '../Button'
 import PropTypes from 'prop-types'
-import { useAppDispatch, useAppContext } from '../../../context/AppContext'
+import { addNote } from '../../../utils/network-data'
 
 
-const Modal = ({ isEditModal, note, modalIsOpen, closeModal }) => {
-  const [archiveNote, setArchiveNote] = useState(false);
-  // const [result, setResult] = useState()
-  const [noteId, setNoteId] = useState();
+const Modal = ({modalIsOpen, closeModal }) => {
   const [titleValue, setTitleValue] = useState('');
   const [contentValue, setContentValue] = useState('');
-  const dispatch = useAppDispatch();
-  const [filteredNotes, setFilteredNotes] = useState()
-
-
-  useEffect(() => {
-    if(modalIsOpen) {
-       if(note) {
-         setNoteId(note.id)
-         setTitleValue(note.title)
-         setContentValue(note.body)
-         setArchiveNote(note.archived)
-       }
-      }
-
-  }, [modalIsOpen])
 
   const handleContentValue = e => {
     setContentValue(e.target.value);
@@ -36,34 +18,13 @@ const Modal = ({ isEditModal, note, modalIsOpen, closeModal }) => {
     setTitleValue(e.target.value);
   }
 
-  const addNote = () => {
-    dispatch({
-        type: 'ADD_NOTES',
-        payload: {
-            id: Date.now(),
-            title: titleValue ,
-            body: contentValue,
-            createdAt: new Date().toISOString(),
-            archived: archiveNote,
-        }
-    })
-    setTitleValue('')
-    setContentValue('')
-    setArchiveNote(false)
-    closeModal()
-  }
-
-  const editNote = () => {
-    dispatch({
-      type: 'EDIT_NOTE',
-      payload: {
-        id: noteId,
-        title: titleValue,
-        body: contentValue,
-        archived: archiveNote
-      }
-    })
-    closeModal()
+  const handleAddNote = async () => {
+    const { error, data } = await addNote({ title: titleValue, body: contentValue });
+    if(!error) {
+      setTitleValue('')
+      setContentValue('')
+      closeModal()
+    }    
   }
 
   return (
@@ -95,10 +56,8 @@ const Modal = ({ isEditModal, note, modalIsOpen, closeModal }) => {
                 }
                 }}
         >
-            {/* <div className="bg-black fixed h-screen w-screen top-0 left-0 right-0 bottom-0"></div> */}
-            {/* <div className="modal-content"> */}
-                <h1 className='font-bold text-xl text-center'>{isEditModal ? "Edit Notes" : "Add Notes"}</h1>
-                {/* label, type, placeholder, name, style, onInputChange */}
+            
+                <h1 className='font-bold text-xl text-center'>Add Notes</h1>
                 <Input 
                     label={'Note Title'} 
                     type={'text'} 
@@ -121,12 +80,8 @@ const Modal = ({ isEditModal, note, modalIsOpen, closeModal }) => {
                     value={contentValue}
                     onValueChange={handleContentValue}
                 />
-                <div className='flex gap-2 mb-4'>
-                  <input name='archived' type="checkbox" checked={archiveNote} onChange={(e) => setArchiveNote(e.target.checked)} />
-                  <label htmlFor="archived" className='font-semibold'>Archive</label>
-                </div>
-                <Button children={isEditModal ? 'Edit Note' : 'Add Note'} size={'large'} optionalClass={"bg-blue-500 w-full text-white font-semibold"} onClick={isEditModal ? editNote : addNote} />
-            {/* </div> */}
+                <Button children='Add Note' size={'large'} optionalClass={"bg-blue-500 w-full text-white font-semibold"} onClick={handleAddNote} />
+            
         </ReactModal>
     </>
   )

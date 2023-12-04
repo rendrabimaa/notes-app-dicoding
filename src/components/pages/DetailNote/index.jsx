@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useAppContext } from '../../../context/AppContext'
 import { Link, useParams } from 'react-router-dom'
 import NotFound from '../404'
+import { getNote } from '../../../utils/network-data'
 
 const DetailNote = () => {
-  const notes = useAppContext()
   const [note, setNote] = useState()
   const [match, setMatch] = useState(false)
   let {id} = useParams()
@@ -16,11 +15,14 @@ const DetailNote = () => {
 
   
 
-  const filteredNoteById = (id) => {
-    const data = notes.find((result) => result.id == id)
-
-    setMatch(!!data)
-    setNote(data||null)    
+  const filteredNoteById = async (id) => {
+    const response = await getNote(id)
+    if(!response.error){
+      console.log(response.data)
+      setNote(response.data||null)  
+      setMatch(!response.error)
+      return;  
+    }
   }
 
   const changeFormatDate = (dateString) => {

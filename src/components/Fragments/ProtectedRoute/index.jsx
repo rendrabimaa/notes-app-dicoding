@@ -3,18 +3,13 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuthContext } from "../../../context/AuthContext";
 
 const ProtectedRoute = () => {
-    const { user, getToken } = useAuthContext();
+    const { userToken, getToken } = useAuthContext();
 
-    // useEffect(() => {
-    //     const getData = async () => {
-    //         await getToken();
-    //         console.log(user)
-    //     }
+    useEffect(() => {
+        getToken();
+    }, [userToken])
 
-    //     getData()
-    // }, [])
-
-    return user ? <Outlet /> : <Navigate to='/auth/login'/>;
+    return userToken ? <Outlet /> : <Navigate to='/auth/login'/>;
 }
 
 export default ProtectedRoute

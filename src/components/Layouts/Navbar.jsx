@@ -6,13 +6,18 @@ import { useUrlParamsContext } from "../../context/URLParamsContext";
 import PropTypes from "prop-types";
 import DarkModeButton from "../Fragments/DarkModeButton";
 import LogoutButton from "../Fragments/LogoutButton";
+import { useAuthContext } from "../../context/AuthContext";
 
 
 const Navbar = ({openAddModal}) => {
-
     const { urlParamsContext } = useUrlParamsContext()
+    const { userName,getUserName } = useAuthContext()
     
     const isArchivePage = urlParamsContext === "/archive" ? true : false;
+
+    useEffect(() => {
+        getUserName()
+    }, [userName])
 
     return (
         <>

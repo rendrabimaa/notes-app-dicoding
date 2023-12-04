@@ -1,25 +1,88 @@
-import React, { useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import Container from "../../Layouts/Container"
-import Cards from "../../Fragments/Cards"
 import { useLocation } from "react-router-dom"
 import { useUrlParamsContext } from "../../../context/URLParamsContext"
+import Card from "../../Elements/Card"
+import { useSearchContext } from "../../../context/SearchContext"
+import NotFoundText from "../../Elements/NotFoundText"
+import { deleteNote, getArchivedNotes, unarchiveNote } from "../../../utils/network-data"
 
 
-const ArchiveNotes = () => {
+const Notes = () => {
+    const [notes, setNotes] = useState()
     const params = useLocation()
-    const {urlParamsContext, setUrlParamsContext} = useUrlParamsContext()
+    const {setUrlParamsContext} = useUrlParamsContext()
+    const [filteredNotes, setFilteredNotes]= useState(null);
+    const {searchContext} = useSearchContext();
+    const [modalIsOpen, setModalIsOpen ] = useState(false)
+    
     
     useEffect(() => {
         setUrlParamsContext(params.pathname)
     }, [params])
 
+    const fetchNotes = async () => {
+        const response = await getArchivedNotes();
+        if(!response.error) {
+            setNotes(response.data)
+        }
+    }
+
+    useEffect(() => {
+        fetchNotes()
+    }, [notes])
+
+    useEffect(() => {
+        const filtered = searchContext.length > 0
+            ? notes.filter(result => result.title.toLowerCase().includes(searchContext.toLowerCase()))
+            : notes;
+    
+        setFilteredNotes(filtered);
+    }, [searchContext, notes]);
+
+
+
+    const handleClickAction = (id, action) => {
+        switch(action) {
+          case "unarchive":
+            const handleArchiveNotes = async () => {
+              const response = await unarchiveNote(id);
+              if(!response.error) {
+                fetchNotes()
+              }
+            }
+            handleArchiveNotes();
+            break;
+          case "delete":
+            const handleDeleteNote = async () => {
+              const response = await deleteNote(id);
+              if(!response.error) {
+                  fetchNotes()
+              }
+            }
+            handleDeleteNote()
+            break;
+          default: 
+            console.log('error')
+        }
+      }
+
+
     return (
         <Container>
-            <div className="flex justify-between mb-4 mt-60 md:mt-56 items-end">
+            <div className="flex justify-between w-full mb-4 mt-60 md:mt-56 items-end">
             </div>
-            <Cards archived={true}/>
+            {/* <Modal modalIsOpen={modalIsOpen} closeModal={closeModal} note={selectedItem} isEditModal={true}/> */}
+            <div className='flex flex-wrap w-full gap-4'>
+                    {filteredNotes && filteredNotes.length > 0 ? (filteredNotes.map((data, index) => {
+                        return (
+                        <Card data={data} key={data.id} handleClickAction={handleClickAction} />
+                        )
+                    })) : <NotFoundText />}
+            </div>
+            {/* <Cards archived={false}/> */}
         </Container>
     )
 }
 
-export default ArchiveNotes
+export default Notes

@@ -3,7 +3,6 @@ import useInput from '../../../../hooks/useInput'
 import Input from '../../../Elements/Input';
 import Button from '../../../Elements/Button';
 import { Link, useNavigate, redirect } from 'react-router-dom';
-import { login } from '../../../../utils/network-data';
 import { useAuthContext } from '../../../../context/AuthContext';
 
 

@@ -1,20 +1,24 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { getAccessToken, login, putAccessToken } from "../utils/network-data";
+import { getAccessToken, getUserLogged, login, putAccessToken } from "../utils/network-data";
 
 const AuthContext = createContext()
 
 const AuthContextProvider = ({children}) => {
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        getToken()
-
-    }, [])
+    const [userToken, setUserToken] = useState(null);
+    const [userName, setUserName] = useState(null);
 
     const getToken = async () => {
         const token = await getAccessToken() 
         if (token) {
-            setUser(token);
+            setUserToken(token);
+        }
+    }
+    
+    const getUserName = async () => {
+        const response = await getUserLogged();
+        if(!response.error) {
+            await setUserName(response.data.name)
+            console.log(userName)
         }
     }
 
@@ -22,19 +26,23 @@ const AuthContextProvider = ({children}) => {
         const response = await login({ email: email, password: password });
 
         if (!response.error) {
-            await putAccessToken()
-            getToken()
+            await putAccessToken(response.data.accessToken)
+            await getToken()
+            getUserName()
         }
 
     } 
+
+
     
     const handleLogout = () => {
         localStorage.removeItem('accessToken');
-        setUser(null);
+        setUserToken(null);
+        setUserName(null)
     }
 
     return (
-        <AuthContext.Provider value={{ user, handleLogin, handleLogout, getToken }}>
+        <AuthContext.Provider value={{ userToken, handleLogin, handleLogout, getToken, userName, getUserName }}>
             {children}
         </AuthContext.Provider>
     )    

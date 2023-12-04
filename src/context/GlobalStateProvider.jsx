@@ -3,7 +3,6 @@ import DarkModeContextProvider from './DarkModeContext'
 import AuthContextProvider from './AuthContext'
 import UrlParamsProvider from './URLParamsContext'
 import SearchProvider from './SearchContext'
-import AppProvider from './AppContext'
 
 const GlobalStateProvider = ({ children }) => {
   return (
@@ -12,9 +11,7 @@ const GlobalStateProvider = ({ children }) => {
         <AuthContextProvider>
             <UrlParamsProvider>
                 <SearchProvider>
-                    <AppProvider>
-                        {children}
-                    </AppProvider>
+                            {children}
                 </SearchProvider>
             </UrlParamsProvider>
         </AuthContextProvider>
