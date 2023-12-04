@@ -7,11 +7,15 @@ const DarkModeContextProvider = ({children}) => {
 
     useEffect(() => {
         const savedMode = localStorage.getItem('darkMode');
-        if (savedMode) {
+        if (savedMode === "true") {
             setIsDarkMode(JSON.parse(savedMode));
+            document.documentElement.classList.add("dark")
         } else {
             // Deteksi preferensi tema gelap dari browser
             const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            darkModeMediaQuery.matches ?
+            document.documentElement.classList.add("dark")
+            : document.documentElement.classList.remove("dark");
             setIsDarkMode(darkModeMediaQuery.matches);
         }
     }, []);
